@@ -44,7 +44,13 @@ const Blog = (props) => {
             "embedded-asset-block": (node) => {
                 const alt = node.data.target.fields.title['en-US']
                 const url = node.data.target.fields.file['en-US'].url
-                return <img alt={alt} src={url}/>
+                const fileType = node.data.target.fields.file['en-US'].contentType
+                if (fileType === "video/mp4") {
+                    return <video alt={alt} src={url} autoplay playsinline="true" preload="auto" webkit-playsInline="true" controls type="video/mp4" width="270"/>
+                }
+                else {
+                    return <img alt={alt} src={url}/>
+                }
             }
         }
     }
